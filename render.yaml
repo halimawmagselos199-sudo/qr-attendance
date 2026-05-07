@@ -1,0 +1,23 @@
+services:
+  # Web Service
+  - type: web
+    name: qr-attendance-system
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node simple-server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /
+    autoDeploy: true
+
+  # PostgreSQL Database (optional - for production)
+  # Uncomment if you want to use PostgreSQL instead of SQLite
+  # - type: postgres
+  #   name: qr-attendance-db
+  #   plan: free
+  #   user: qruser
+  #   database: qrattendance

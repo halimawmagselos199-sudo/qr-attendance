@@ -4,10 +4,11 @@
 
 ### 1. Install Dependencies
 ```bash
-npm install express sqlite3 qrcode
+npm install
 ```
+*Note: Only essential dependencies are installed (express, qrcode, sqlite3)*
 
-### 2. Start the Server
+### 2. Start Server
 ```bash
 node simple-server.js
 ```

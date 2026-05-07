@@ -66,3 +66,7 @@ jspm_packages/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Render.com specific
+/tmp/attendance.db
+render.yaml.bak

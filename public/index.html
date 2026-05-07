@@ -7,16 +7,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-hover: #4f46e5;
+            --accent-secondary-hover: #7c3aed;
+            --success: #10b981;
+            --success-hover: #059669;
+            --error: #ef4444;
+            --error-hover: #dc2626;
+            --border: #334155;
+            --shadow: rgba(0,0,0,.3);
+            --nav-gradient: linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0) 100%);
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #e5e7eb;
+            --bg-secondary: #d1d5db;
+            --bg-tertiary: #9ca3af;
+            --text-primary: #1f2937;
+            --text-secondary: #374151;
+            --text-tertiary: #6b7280;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-hover: #4f46e5;
+            --accent-secondary-hover: #7c3aed;
+            --success: #10b981;
+            --success-hover: #059669;
+            --error: #ef4444;
+            --error-hover: #dc2626;
+            --border: #9ca3af;
+            --shadow: rgba(0,0,0,.1);
+            --nav-gradient: linear-gradient(180deg, rgba(229,231,235,0.9) 0%, rgba(229,231,235,0) 100%);
+        }
+        
         *{margin:0;padding:0;box-sizing:border-box}
         
         body{
             font-family:'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background:#0f172a;
-            color:#f8fafc;
+            background:var(--bg-primary);
+            color:var(--text-primary);
             min-height:100vh;
             line-height:1.6;
             overflow-x:hidden;
-            font-weight:400
+            font-weight:400;
+            transition:background-color .3s ease,color .3s ease
         }
         
         /* Navigation */
@@ -27,7 +68,7 @@
             left:0;
             z-index:1000;
             padding:20px 40px;
-            background:linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0) 100%);
+            background:var(--nav-gradient);
             backdrop-filter:blur(10px)
         }
         
@@ -46,7 +87,7 @@
         }
         
         .nav-links a{
-            color:#94a3b8;
+            color:var(--text-secondary);
             text-decoration:none;
             font-size:14px;
             font-weight:500;
@@ -56,7 +97,7 @@
         }
         
         .nav-links a:hover{
-            color:#f8fafc
+            color:var(--text-primary)
         }
         
         /* Hero Section */
@@ -79,6 +120,26 @@
             bottom:0;
             background:radial-gradient(circle at 50% 50%, rgba(99,102,241,0.1) 0%, transparent 50%);
             pointer-events:none
+        }
+        
+        .hero-title{
+            font-family:'Playfair Display', 'Poppins', serif;
+            font-size:clamp(3rem,8vw,6rem);
+            font-weight:900;
+            margin-bottom:32px;
+            background:linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            line-height:1.1;
+            letter-spacing:-0.01em
+        }
+        
+        .hero-subtitle{
+            font-size:1.25rem;
+            color:var(--text-secondary);
+            margin-bottom:48px;
+            font-weight:400
         }
         
         .hero-content{
@@ -109,7 +170,7 @@
         
         .cta-button{
             display:inline-block;
-            background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background:linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
             color:white;
             padding:16px 40px;
             border-radius:50px;
@@ -143,15 +204,42 @@
         
         .container{max-width:1200px;margin:0 auto;padding:32px}
         
+        /* Center Register Tab */
+        #students-tab {
+            margin-top: 3vh;
+        }
+        
+        /* Center Scanner Tab */
+        #scanner-tab {
+            margin-top: 3vh;
+        }
+        
+        /* Center Other Tabs */
+        #students-qr-tab {
+            margin-top: 3vh;
+        }
+        
+        #attendance-tab {
+            margin-top: 3vh;
+        }
+        
+        #session-tab {
+            margin-top: 3vh;
+        }
+        
+        #settings-tab {
+            margin-top: 3vh;
+        }
+        
                 
         .tab-content{
             display:none;
-            background:#1e293b;
+            background:var(--bg-secondary);
             padding:32px;
             border-radius:12px;
-            box-shadow:0 1px 3px rgba(0,0,0,.3);
+            box-shadow:0 1px 3px var(--shadow);
             margin-bottom:24px;
-            border:1px solid #334155
+            border:1px solid var(--border)
         }
         
         .tab-content.active{display:block}
@@ -162,7 +250,7 @@
             display:block;
             margin-bottom:8px;
             font-weight:600;
-            color:#f8fafc;
+            color:var(--text-primary);
             font-size:14px;
             font-family:'Poppins', sans-serif
         }
@@ -170,23 +258,39 @@
         input,select{
             width:100%;
             padding:12px 16px;
-            border:1px solid #334155;
+            border:1px solid var(--border);
             border-radius:8px;
             font-size:14px;
-            background:#0f172a;
+            background:var(--bg-primary);
             transition:border-color .2s ease,box-shadow .2s ease;
-            color:#f8fafc;
+            color:var(--text-primary);
             font-family:'Poppins', sans-serif
+        }
+        
+        select{
+            appearance:none;
+            -webkit-appearance:none;
+            -moz-appearance:none;
+            background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23f8fafc' d='M200.485 96.485l-72.485 72.485-72.485-72.485c-4.686-4.686-12.284-4.686-16.971 0s-4.686 12.284 0 16.971l80 80c4.686 4.686 12.284 4.686 16.971 0l80-80c4.686-4.686 4.686-12.284 0-16.971s-12.284-4.686-16.971 0z'/%3E%3C/svg%3E");
+            background-repeat:no-repeat;
+            background-position:right 16px center;
+            background-size:12px;
+            padding-right:40px
+        }
+        
+        [data-theme="light"] select {
+            background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%231e293b' d='M200.485 96.485l-72.485 72.485-72.485-72.485c-4.686-4.686-12.284-4.686-16.971 0s-4.686 12.284 0 16.971l80 80c4.686 4.686 12.284 4.686 16.971 0l80-80c4.686-4.686 4.686-12.284 0-16.971s-12.284-4.686-16.971 0z'/%3E%3C/svg%3E");
         }
         
         input:focus,select:focus{
             outline:none;
-            border-color:#6366f1;
+            border-color:var(--accent-primary);
             box-shadow:0 0 0 3px rgba(99,102,241,.1)
         }
         
+                
         button{
-            background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background:linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
             color:white;
             padding:12px 24px;
             border:0;
@@ -201,43 +305,78 @@
         }
         
         button:hover{
-            background:linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background:linear-gradient(135deg, var(--accent-hover) 0%, var(--accent-secondary-hover) 100%);
             transform:translateY(-1px);
             box-shadow:0 4px 12px rgba(99,102,241,.15)
         }
         
         button:active{transform:translateY(0)}
-        button:disabled{background:#94a3b8;cursor:not-allowed}
+        button:disabled{background:var(--text-secondary);cursor:not-allowed}
         
         .student-list{
             display:grid;
             grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
             gap:24px;
-            margin-top:32px
+            margin-top:32px;
+            max-height:600px;
+            overflow-y:auto;
+            padding-right:8px
+        }
+        
+        .student-list::-webkit-scrollbar{
+            width:6px
+        }
+        
+        .student-list::-webkit-scrollbar-track{
+            background:var(--bg-secondary);
+            border-radius:3px
+        }
+        
+        .student-list::-webkit-scrollbar-thumb{
+            background:var(--bg-tertiary);
+            border-radius:3px
+        }
+        
+        .student-list::-webkit-scrollbar-thumb:hover{
+            background:var(--text-secondary)
         }
         
         .student-card{
-            background:#1e293b;
+            background:var(--bg-secondary);
             padding:24px;
             border-radius:12px;
-            box-shadow:0 1px 3px rgba(0,0,0,.3);
+            box-shadow:0 1px 3px var(--shadow);
             text-align:center;
-            border:1px solid #334155;
+            border:1px solid var(--border);
             transition:all .2s ease;
             position:relative
         }
         
         .student-card:hover{
             transform:translateY(-2px);
-            box-shadow:0 8px 25px rgba(0,0,0,.08)
+            box-shadow:0 8px 25px rgba(0,0,0,.08);
+            border-color:var(--accent-primary)
         }
         
         .qr-code{
             margin:16px 0;
             padding:16px;
-            background:#0f172a;
+            background:var(--bg-primary);
             border-radius:8px;
-            border:1px solid #334155
+            border:1px solid var(--border);
+            text-align:center
+        }
+        
+        .qr-code img{
+            max-width:200px;
+            display:block;
+            margin:0 auto
+        }
+        
+        #studentModalQRCode{
+            display:block;
+            margin:0 auto;
+            text-align:center
         }
         
         .scanner-container{
@@ -246,38 +385,48 @@
         }
         
         #reader{
-            width:320px;
-            height:320px;
+            width:100%;
+            max-width:400px;
+            height:400px;
             margin:0 auto;
-            border:1px solid #334155;
+            border:1px solid var(--border);
             border-radius:12px;
-            background:#0f172a
+            background:var(--bg-primary);
+            overflow:hidden;
+            position:relative
+        }
+        
+        #reader video{
+            width:100% !important;
+            height:100% !important;
+            object-fit:cover;
+            border-radius:12px
         }
         
         .attendance-list{margin-top:32px}
         
         .attendance-item{
-            background:#1e293b;
+            background:var(--bg-secondary);
             padding:20px 24px;
             margin-bottom:16px;
             border-radius:12px;
-            box-shadow:0 1px 3px rgba(0,0,0,.3);
+            box-shadow:0 1px 3px var(--shadow);
             display:flex;
             justify-content:space-between;
             align-items:center;
             border-left:4px solid transparent;
             transition:all .2s ease;
-            border:1px solid #334155
+            border:1px solid var(--border)
         }
         
         .attendance-item:hover{
             transform:translateX(4px);
             box-shadow:0 4px 12px rgba(0,0,0,.08);
-            border-left-color:#6366f1
+            border-left-color:var(--accent-primary)
         }
         
         .section-badge{
-            background:#6366f1;
+            background:var(--accent-primary);
             color:white;
             padding:4px 12px;
             border-radius:20px;
@@ -286,34 +435,54 @@
         }
         
         .time{
-            color:#64748b;
+            color:var(--text-tertiary);
             font-size:12px;
             font-weight:500;
             font-family:'Poppins', sans-serif
         }
         
+        .student-attendance-item{
+            background:var(--bg-secondary);
+            padding:16px 20px;
+            margin-bottom:12px;
+            border-radius:8px;
+            box-shadow:0 1px 3px var(--shadow);
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-left:4px solid var(--accent-primary);
+            transition:all .2s ease;
+            border:1px solid var(--border)
+        }
+        
+        .student-attendance-item:hover{
+            transform:translateX(4px);
+            box-shadow:0 4px 12px rgba(0,0,0,.08);
+            border-left-color:var(--accent-secondary)
+        }
+        
         .success-message{
-            background:linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background:linear-gradient(135deg, var(--success) 0%, var(--success-hover) 100%);
             color:white;
             padding:16px 20px;
             border-radius:8px;
             margin:16px 0;
-            border-left:4px solid #059669;
+            border-left:4px solid var(--success-hover);
             box-shadow:0 2px 4px rgba(16,185,129,.1)
         }
         
         .error-message{
-            background:linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            background:linear-gradient(135deg, var(--error) 0%, var(--error-hover) 100%);
             color:white;
             padding:16px 20px;
             border-radius:8px;
             margin:16px 0;
-            border-left:4px solid #dc2626;
+            border-left:4px solid var(--error-hover);
             box-shadow:0 2px 4px rgba(239,68,68,.1)
         }
         
         .session-info{
-            background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background:linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
             color:white;
             padding:20px 24px;
             border-radius:12px;
@@ -325,30 +494,256 @@
         .delete-btn{
             position:absolute;
             top:12px;
-            right:12px;
-            background:#ef4444;
+            right:6px;
+            background:var(--error);
             color:white;
-            border:0;
+            border:1px solid var(--error-hover);
             border-radius:50%;
-            width:28px;
-            height:28px;
-            font-size:16px;
+            width:10px;
+            height:10px;
+            font-size:10px;
             font-weight:bold;
             cursor:pointer;
             display:flex;
             align-items:center;
             justify-content:center;
             transition:all .2s ease;
-            box-shadow:0 2px 4px rgba(239,68,68,.15)
+            box-shadow:0 1px 2px rgba(239,68,68,.15)
         }
         
         .delete-btn:hover{
-            background:#dc2626;
+            background:var(--error-hover);
             transform:scale(1.1);
             box-shadow:0 4px 8px rgba(239,68,68,.25)
         }
         
         .delete-btn:active{transform:scale(.95)}
+        
+        .search-container{
+            position:relative;
+            margin-bottom:24px
+        }
+        
+        .search-icon{
+            position:absolute;
+            right:12px;
+            top:50%;
+            transform:translateY(-50%);
+            color:var(--text-tertiary);
+            pointer-events:none
+        }
+        
+        #studentSearch{
+            padding-right:40px
+        }
+        
+        /* QR Popup Modal Styles */
+        .qr-modal{
+            display:none;
+            position:fixed;
+            z-index:2000;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            background-color:rgba(0,0,0,0.8);
+            backdrop-filter:blur(5px);
+            animation:fadeIn 0.3s ease
+        }
+        
+        .qr-modal.active{
+            display:flex;
+            align-items:center;
+            justify-content:center
+        }
+        
+        .qr-modal-content{
+            background:var(--bg-secondary);
+            padding:32px;
+            border-radius:16px;
+            box-shadow:0 20px 60px rgba(0,0,0,0.5);
+            text-align:center;
+            max-width:400px;
+            width:90%;
+            border:1px solid var(--border);
+            animation:slideIn 0.3s ease
+        }
+        
+        .qr-modal-header{
+            margin-bottom:24px
+        }
+        
+        .qr-modal-title{
+            font-size:1.5rem;
+            font-weight:600;
+            color:var(--text-primary);
+            margin-bottom:8px
+        }
+        
+        .qr-modal-subtitle{
+            color:var(--text-secondary);
+            font-size:0.9rem
+        }
+        
+        .qr-modal-body{
+            margin-bottom:24px
+        }
+        
+        .qr-modal-qr{
+            background:var(--bg-primary);
+            padding:20px;
+            border-radius:12px;
+            margin:16px 0;
+            border:1px solid var(--border)
+        }
+        
+        .qr-modal-qr img{
+            max-width:200px;
+            height:auto;
+            border-radius:8px
+        }
+        
+        .qr-modal-student-info{
+            background:var(--bg-primary);
+            padding:16px;
+            border-radius:8px;
+            margin:16px 0;
+            border:1px solid var(--border)
+        }
+        
+        .qr-modal-student-name{
+            font-weight:600;
+            color:var(--text-primary);
+            font-size:1.1rem;
+            margin-bottom:4px
+        }
+        
+        .qr-modal-student-id{
+            color:var(--text-tertiary);
+            font-size:0.9rem
+        }
+        
+        .qr-modal-section{
+            display:inline-block;
+            background:var(--accent-primary);
+            color:white;
+            padding:4px 12px;
+            border-radius:20px;
+            font-size:0.8rem;
+            font-weight:600;
+            margin-top:8px
+        }
+        
+        .qr-modal-footer{
+            display:flex;
+            gap:12px;
+            justify-content:center
+        }
+        
+        .qr-modal-close{
+            background:linear-gradient(135deg, var(--error) 0%, var(--error-hover) 100%);
+            color:white;
+            padding:12px 24px;
+            border:0;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:14px;
+            font-weight:600;
+            transition:all .2s ease;
+            font-family:'Poppins', sans-serif
+        }
+        
+        .qr-modal-close:hover{
+            background:linear-gradient(135deg, var(--error-hover) 0%, #b91c1c 100%);
+            transform:translateY(-1px)
+        }
+        
+        .qr-modal-print{
+            background:linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color:white;
+            padding:12px 24px;
+            border:0;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:14px;
+            font-weight:600;
+            transition:all .2s ease;
+            font-family:'Poppins', sans-serif
+        }
+        
+        .qr-modal-print:hover{
+            background:linear-gradient(135deg, var(--accent-hover) 0%, var(--accent-secondary-hover) 100%);
+            transform:translateY(-1px)
+        }
+        
+        @keyframes fadeIn{
+            from{opacity:0}
+            to{opacity:1}
+        }
+        
+        @keyframes slideIn{
+            from{
+                transform:translateY(-50px);
+                opacity:0
+            }
+            to{
+                transform:translateY(0);
+                opacity:1
+            }
+        }
+        
+        /* Theme Toggle Styles */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--accent-primary);
+        }
+        
+        .theme-toggle-slider {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .theme-toggle[data-theme="light"] .theme-toggle-slider {
+            transform: translateX(30px);
+        }
+        
+        .theme-toggle[data-theme="dark"] .theme-toggle-slider {
+            transform: translateX(0);
+        }
+        
+        .theme-icon {
+            font-size: 12px;
+            line-height: 1;
+        }
+        
+        .theme-toggle[data-theme="light"] .theme-icon {
+            color: #f59e0b;
+        }
+        
+        .theme-toggle[data-theme="dark"] .theme-icon {
+            color: #6366f1;
+        }
     </style>
 </head>
 <body>
@@ -356,13 +751,22 @@
     <nav class="nav">
         <div class="nav-container">
             <div class="logo">
-                <h2 style="color: #f8fafc; font-weight: 600;">QR Attendance</h2>
+                <h2 style="color: var(--text-primary); font-weight: 600;">QR Attendance</h2>
             </div>
             <ul class="nav-links">
-                <li><a onclick="navigateToTab('students')">Students</a></li>
+                <li><a onclick="navigateToTab('students')">Register</a></li>
+                <li><a onclick="navigateToTab('students-qr')">Students</a></li>
                 <li><a onclick="navigateToTab('scanner')">Scanner</a></li>
                 <li><a onclick="navigateToTab('attendance')">Attendance</a></li>
                 <li><a onclick="navigateToTab('session')">Session</a></li>
+                <li><a onclick="navigateToTab('settings')">Settings</a></li>
+                <li>
+                    <div class="theme-toggle" id="themeToggle" data-theme="dark" onclick="toggleTheme()" title="Toggle dark/light mode">
+                        <div class="theme-toggle-slider">
+                            <span class="theme-icon" id="themeIcon">🌙</span>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -370,8 +774,6 @@
     <!-- Hero Section -->
     <section class="hero" id="heroSection">
         <div class="hero-content">
-            <h1 class="hero-title">QR Attendance System</h1>
-            <button class="cta-button" onclick="showMainContent()">VIEW SYSTEM</button>
         </div>
     </section>
 
@@ -379,21 +781,50 @@
     <main class="main-content" id="mainContent">
         <div class="container">
         
-        <!-- Students Tab -->
+        <!-- Register Tab -->
         <div id="students-tab" class="tab-content active">
-            <h2>Add Student</h2>
-            <div class="form-group">
-                <label>Student ID:</label>
-                <input type="text" id="studentId" placeholder="Enter student ID">
-            </div>
+            <h2>Student Registration</h2>
             <div class="form-group">
                 <label>Name:</label>
-                <input type="text" id="studentName" placeholder="Enter student name">
+                <input type="text" id="studentName" placeholder="Enter student name" autocomplete="off">
             </div>
-            <button onclick="addStudent()">Add Student</button>
-            <button onclick="generateQRCode()">Generate QR Code</button>
-            
-            <div id="studentList" class="student-list"></div>
+            <div class="form-group">
+                <label>Student ID:</label>
+                <input type="text" id="studentId" placeholder="Enter student ID" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>Section:</label>
+                <select id="studentSection">
+                    <option value="">Select Section</option>
+                    <option value="A">Section A</option>
+                    <option value="B">Section B</option>
+                    <option value="C">Section C</option>
+                    <option value="D">Section D</option>
+                </select>
+            </div>
+            <button onclick="addStudent()">Register Student</button>
+        </div>
+        
+        <!-- Students Tab -->
+        <div id="students-qr-tab" class="tab-content">
+            <h2>Students</h2>
+            <div class="form-group">
+                <label>Search Students:</label>
+                <input type="text" id="studentQRSearch" placeholder="Search by name or ID..." oninput="searchStudentsQR()" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>Filter by Section:</label>
+                <select id="studentQRSectionFilter" onchange="filterStudentsQR()">
+                    <option value="">All Sections</option>
+                    <option value="A">Section A</option>
+                    <option value="B">Section B</option>
+                    <option value="C">Section C</option>
+                    <option value="D">Section D</option>
+                </select>
+            </div>
+            <button onclick="refreshStudentsQR()">Refresh</button>
+            <button onclick="printAllQRCodes()">Print All QR Codes</button>
+            <div id="studentsQRList" class="student-list"></div>
         </div>
         
         <!-- Scanner Tab -->
@@ -401,6 +832,15 @@
             <h2>Scan QR Code</h2>
             <div class="session-info" id="sessionInfo" style="display: none;">
                 <strong>Current Session: <span id="currentSection"></span></strong>
+            </div>
+            <div style="display: flex; gap: 12px; margin-bottom: 16px; align-items: center;">
+                <div class="form-group" style="margin: 0; flex: 1;">
+                    <label>Select Camera:</label>
+                    <select id="cameraSelect" onchange="switchCamera()">
+                        <option value="">Loading cameras...</option>
+                    </select>
+                </div>
+                <button onclick="resetScanner()" style="margin-top: 24px;">Reset Camera</button>
             </div>
             <div class="scanner-container">
                 <div id="reader"></div>
@@ -413,6 +853,69 @@
             <h2>Attendance Records</h2>
             <button onclick="refreshAttendance()">Refresh</button>
             <button onclick="exportAttendance()">Export CSV</button>
+            
+            <!-- Student Scan Count Section -->
+            <div style="margin-top: 24px; padding: 24px; background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--border);">
+                <h3 style="margin-bottom: 16px; color: var(--text-primary);">Student Scan Analysis</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Filter by Section:</label>
+                        <select id="scanCountSectionFilter" onchange="loadStudentScanCounts()">
+                            <option value="">All Sections</option>
+                            <option value="A">Section A</option>
+                            <option value="B">Section B</option>
+                            <option value="C">Section C</option>
+                            <option value="D">Section D</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Date Range:</label>
+                        <select id="dateRangeFilter" onchange="loadStudentScanCounts()">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 16px;">
+                    <label>Select Student:</label>
+                    <select id="studentSelect" onchange="showStudentScanCount()" style="width: 100%;">
+                        <option value="">Choose a student...</option>
+                    </select>
+                </div>
+                
+                <div id="scanCountDisplay" style="display: none; padding: 16px; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 4px;" id="selectedStudentName">Student Name</div>
+                            <div style="color: var(--text-tertiary); font-size: 14px;" id="selectedStudentId">Student ID</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--accent-primary);" id="scanCountValue">0</div>
+                            <div style="color: var(--text-secondary); font-size: 12px;">Total Attendance</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="studentAttendanceRecords" style="display: none; margin-top: 16px;">
+                    <h4 style="color: var(--text-primary); margin-bottom: 12px; font-size: 16px;">Attendance Records</h4>
+                    <div id="studentAttendanceList" class="attendance-list" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 16px;">
+                <label>Filter by Section:</label>
+                <select id="attendanceSectionFilter" onchange="filterAttendance()">
+                    <option value="">All Sections</option>
+                    <option value="A">Section A</option>
+                    <option value="B">Section B</option>
+                    <option value="C">Section C</option>
+                    <option value="D">Section D</option>
+                </select>
+            </div>
             <div id="attendanceList" class="attendance-list"></div>
         </div>
         
@@ -432,13 +935,117 @@
             <button onclick="startSession()" id="startBtn">Start Session</button>
             <button onclick="endSession()" id="endBtn" disabled>End Session</button>
         </div>
+        
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="tab-content">
+            <h2>Settings</h2>
+            
+            <!-- Section Management Section -->
+            <div style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 24px;">
+                <h3 style="margin-bottom: 20px; color: var(--text-primary);">Section Management</h3>
+                
+                <!-- Add New Section -->
+                <div style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 12px; margin-bottom: 24px; align-items: end;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Section Name:</label>
+                        <input type="text" id="newSectionName" placeholder="Enter section name (e.g., Section A)" autocomplete="off">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Section Code:</label>
+                        <input type="text" id="newSectionCode" placeholder="Enter section code (e.g., A)" maxlength="2" style="text-transform: uppercase;" autocomplete="off">
+                    </div>
+                    <button onclick="addSection()" style="margin-bottom: 0;">Add Section</button>
+                </div>
+                
+                <!-- Sections List -->
+                <div>
+                    <h4 style="margin-bottom: 16px; color: var(--text-primary);">Existing Sections</h4>
+                    <div id="sectionsList" style="max-height: 400px; overflow-y: auto;">
+                        <!-- Sections will be loaded here dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Settings Section -->
+            <div style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
+                <h3 style="margin-bottom: 20px; color: var(--text-primary);">System Settings</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="form-group">
+                        <label>Default Session Duration (minutes):</label>
+                        <input type="number" id="sessionDuration" value="60" min="15" max="480" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label>Auto-end Session:</label>
+                        <select id="autoEndSession">
+                            <option value="true">Enabled</option>
+                            <option value="false">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 24px;">
+                    <button onclick="saveSystemSettings()">Save Settings</button>
+                    <button onclick="resetToDefaults()" style="background: linear-gradient(135deg, var(--error) 0%, var(--error-hover) 100%);">Reset to Defaults</button>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
+
+    <!-- QR Code Popup Modal -->
+    <div id="qrModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <div class="qr-modal-header">
+                <h2 class="qr-modal-title">Student QR Code Generated!</h2>
+                <p class="qr-modal-subtitle">Your student has been successfully registered</p>
+            </div>
+            <div class="qr-modal-body">
+                <div class="qr-modal-student-info">
+                    <div class="qr-modal-student-name" id="modalStudentName">Student Name</div>
+                    <div class="qr-modal-student-id" id="modalStudentId">Student ID</div>
+                    <div class="qr-modal-section" id="modalStudentSection" style="display: none;">Section</div>
+                </div>
+                <div class="qr-modal-qr">
+                    <img id="modalQRCode" src="" alt="Student QR Code">
+                </div>
+            </div>
+            <div class="qr-modal-footer">
+                <button class="qr-modal-print" onclick="printQRFromModal()">Print QR</button>
+                <button class="qr-modal-close" onclick="closeQRModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Details Popup Modal -->
+    <div id="studentModal" class="qr-modal">
+        <div class="qr-modal-content">
+            <div class="qr-modal-header">
+                <h2 class="qr-modal-title">Student Details</h2>
+                <p class="qr-modal-subtitle">View and manage student information</p>
+            </div>
+            <div class="qr-modal-body">
+                <div class="qr-modal-student-info">
+                    <div class="qr-modal-student-name" id="studentModalName">Student Name</div>
+                    <div class="qr-modal-student-id" id="studentModalId">Student ID</div>
+                    <div class="qr-modal-section" id="studentModalSection" style="display: none;">Section</div>
+                </div>
+                <div class="qr-modal-qr">
+                    <img id="studentModalQRCode" src="" alt="Student QR Code" style="max-width: 200px;">
+                </div>
+            </div>
+            <div class="qr-modal-footer">
+                <button class="qr-modal-print" onclick="printStudentQR()">Print QR</button>
+                <button class="qr-modal-close" onclick="closeStudentModal()">Close</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let currentTab = 'students';
         let currentSection = null;
         let students = [];
+        let filteredStudents = [];
         let attendance = [];
         let html5QrCode = null;
 
@@ -475,13 +1082,226 @@
             }
         }
 
+        // QR Modal Functions
+        function showQRModal(studentId, name, section, qrCode) {
+            document.getElementById('modalStudentName').textContent = name;
+            document.getElementById('modalStudentId').textContent = `ID: ${studentId}`;
+            
+            const sectionElement = document.getElementById('modalStudentSection');
+            if (section) {
+                sectionElement.textContent = `Section ${section}`;
+                sectionElement.style.display = 'inline-block';
+            } else {
+                sectionElement.style.display = 'none';
+            }
+            
+            document.getElementById('modalQRCode').src = qrCode;
+            document.getElementById('qrModal').classList.add('active');
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').classList.remove('active');
+        }
+
+        // Student Modal Functions
+        function showStudentModal(studentId, name, section, qrCode) {
+            document.getElementById('studentModalName').textContent = name;
+            document.getElementById('studentModalId').textContent = `ID: ${studentId}`;
+            
+            const sectionElement = document.getElementById('studentModalSection');
+            if (section) {
+                sectionElement.textContent = `Section ${section}`;
+                sectionElement.style.display = 'inline-block';
+            } else {
+                sectionElement.style.display = 'none';
+            }
+            
+            const qrElement = document.getElementById('studentModalQRCode');
+            if (qrCode) {
+                qrElement.src = qrCode;
+                qrElement.style.display = 'block';
+            } else {
+                qrElement.style.display = 'none';
+            }
+            
+            document.getElementById('studentModal').classList.add('active');
+        }
+
+        function closeStudentModal() {
+            document.getElementById('studentModal').classList.remove('active');
+        }
+
+        function printStudentQR() {
+            const name = document.getElementById('studentModalName').textContent;
+            const studentId = document.getElementById('studentModalId').textContent.replace('ID: ', '');
+            const section = document.getElementById('studentModalSection').textContent.replace('Section ', '');
+            const qrCode = document.getElementById('studentModalQRCode').src;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Student Details - ${name}</title>
+                    <style>
+                        body { 
+                            font-family: 'Poppins', sans-serif; 
+                            margin: 20px; 
+                            text-align: center;
+                            background: white;
+                        }
+                        .student-container { 
+                            border: 2px solid #334155; 
+                            border-radius: 12px; 
+                            padding: 30px; 
+                            max-width: 400px; 
+                            margin: 0 auto;
+                            background: white;
+                        }
+                        .student-name { 
+                            font-weight: bold; 
+                            font-size: 24px; 
+                            margin-bottom: 8px; 
+                            color: #1e293b;
+                        }
+                        .student-id { 
+                            color: #64748b; 
+                            font-size: 16px; 
+                            margin-bottom: 12px; 
+                        }
+                        .section-badge { 
+                            background: #6366f1; 
+                            color: white; 
+                            padding: 8px 20px; 
+                            border-radius: 20px; 
+                            font-size: 14px; 
+                            font-weight: 600;
+                            display: inline-block;
+                            margin-bottom: 20px;
+                        }
+                        .qr-code { 
+                            margin: 20px 0; 
+                        }
+                        .qr-code img { 
+                            max-width: 250px; 
+                            border-radius: 8px;
+                        }
+                        @media print {
+                            body { margin: 10px; }
+                            .student-container { margin: 0 auto; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="student-container">
+                        <div class="student-name">${name}</div>
+                        <div class="student-id">ID: ${studentId}</div>
+                        ${section ? `<div class="section-badge">Section ${section}</div>` : ''}
+                        <div class="qr-code">
+                            ${qrCode ? `<img src="${qrCode}" alt="QR Code for ${name}">` : '<p style="color: #64748b;">QR Code not available</p>'}
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+
+        function printQRFromModal() {
+            const name = document.getElementById('modalStudentName').textContent;
+            const studentId = document.getElementById('modalStudentId').textContent.replace('ID: ', '');
+            const section = document.getElementById('modalStudentSection').textContent.replace('Section ', '');
+            const qrCode = document.getElementById('modalQRCode').src;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>QR Code - ${name}</title>
+                    <style>
+                        body { 
+                            font-family: 'Poppins', sans-serif; 
+                            margin: 20px; 
+                            text-align: center;
+                            background: white;
+                        }
+                        .qr-container { 
+                            border: 2px solid #334155; 
+                            border-radius: 12px; 
+                            padding: 30px; 
+                            max-width: 300px; 
+                            margin: 0 auto;
+                            background: white;
+                        }
+                        .student-name { 
+                            font-weight: bold; 
+                            font-size: 18px; 
+                            margin-bottom: 8px; 
+                            color: #1e293b;
+                        }
+                        .student-id { 
+                            color: #64748b; 
+                            font-size: 14px; 
+                            margin-bottom: 12px; 
+                        }
+                        .section-badge { 
+                            background: #6366f1; 
+                            color: white; 
+                            padding: 6px 16px; 
+                            border-radius: 20px; 
+                            font-size: 12px; 
+                            font-weight: 600;
+                            display: inline-block;
+                            margin-bottom: 20px;
+                        }
+                        .qr-code { 
+                            margin: 20px 0; 
+                        }
+                        .qr-code img { 
+                            max-width: 200px; 
+                            border-radius: 8px;
+                        }
+                        @media print {
+                            body { margin: 10px; }
+                            .qr-container { margin: 0 auto; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="qr-container">
+                        <div class="student-name">${name}</div>
+                        <div class="student-id">ID: ${studentId}</div>
+                        ${section ? `<div class="section-badge">Section ${section}</div>` : ''}
+                        <div class="qr-code">
+                            <img src="${qrCode}" alt="QR Code for ${name}">
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+
         // Student management
         async function addStudent() {
             const studentId = document.getElementById('studentId').value.trim();
             const name = document.getElementById('studentName').value.trim();
+            const section = document.getElementById('studentSection').value;
             
             if (!studentId || !name) {
                 showMessage('Please enter both student ID and name', 'error');
+                return;
+            }
+            
+            if (!section) {
+                showMessage('Please select a section', 'error');
                 return;
             }
             
@@ -489,21 +1309,30 @@
                 const response = await fetch('/api/students', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ studentId, name })
+                    body: JSON.stringify({ studentId, name, section })
                 });
                 
                 const result = await response.json();
                 
                 if (result.success) {
-                    showMessage('Student added successfully', 'success');
+                    showMessage('Student registered successfully', 'success');
                     document.getElementById('studentId').value = '';
                     document.getElementById('studentName').value = '';
-                    loadStudents();
+                    document.getElementById('studentSection').value = '';
+                    
+                    // Refresh student list and show QR modal for the newly registered student
+                    await refreshStudentsQR();
+                    
+                    // Find the newly registered student and show their QR modal
+                    const newStudent = studentsQRData.find(s => s.student_id === studentId);
+                    if (newStudent && newStudent.qr_code) {
+                        showStudentModal(studentId, name, section, newStudent.qr_code);
+                    }
                 } else {
-                    showMessage(result.error || 'Failed to add student', 'error');
+                    showMessage(result.error || 'Failed to register student', 'error');
                 }
             } catch (error) {
-                showMessage('Error adding student', 'error');
+                showMessage('Error registering student', 'error');
             }
         }
 
@@ -511,19 +1340,45 @@
             try {
                 const response = await fetch('/api/students');
                 students = await response.json();
+                filteredStudents = [];
                 displayStudents();
             } catch (error) {
                 showMessage('Error loading students', 'error');
             }
         }
+        
+        function searchStudents() {
+            const searchTerm = document.getElementById('studentSearch').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                filteredStudents = [];
+                displayStudents();
+                return;
+            }
+            
+            filteredStudents = students.filter(student => 
+                student.name.toLowerCase().includes(searchTerm) ||
+                student.student_id.toLowerCase().includes(searchTerm)
+            );
+            
+            displayStudents();
+        }
 
         function displayStudents() {
             const container = document.getElementById('studentList');
-            container.innerHTML = students.map(student => `
+            const studentsToDisplay = filteredStudents.length > 0 || document.getElementById('studentSearch').value ? filteredStudents : students;
+            
+            if (studentsToDisplay.length === 0 && document.getElementById('studentSearch').value) {
+                container.innerHTML = '<p style="text-align: center; color: #64748b; padding: 32px;">No students found matching your search.</p>';
+                return;
+            }
+            
+            container.innerHTML = studentsToDisplay.map(student => `
                 <div class="student-card">
                     <button class="delete-btn" onclick="deleteStudent('${student.student_id}')" title="Delete student">×</button>
                     <strong>${student.name}</strong><br>
-                    <small>ID: ${student.student_id}</small>
+                    <small>ID: ${student.student_id}</small><br>
+                    ${student.section ? `<span class="section-badge">${student.section}</span>` : ''}
                     <div class="qr-code" id="qr-${student.student_id}">
                         <img src="${student.qrCode}" alt="QR Code" style="max-width: 150px;">
                     </div>
@@ -531,32 +1386,7 @@
             `).join('');
         }
 
-        async function generateQRCode() {
-            const studentId = document.getElementById('studentId').value.trim();
-            const name = document.getElementById('studentName').value.trim();
-            
-            if (!studentId || !name) {
-                showMessage('Please enter both student ID and name', 'error');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`/api/qrcode/${studentId}/${encodeURIComponent(name)}`);
-                const result = await response.json();
-                
-                if (result.qrCode) {
-                    const qrDiv = document.getElementById(`qr-${studentId}`);
-                    if (qrDiv) {
-                        qrDiv.innerHTML = `<img src="${result.qrCode}" alt="QR Code" style="max-width: 150px;">`;
-                    }
-                } else {
-                    showMessage(result.error || 'Failed to generate QR code', 'error');
-                }
-            } catch (error) {
-                showMessage('Error generating QR code', 'error');
-            }
-        }
-
+        
         // Store QR code in localStorage for persistence
         async function storeQRCode(studentId, qrCode) {
             const qrCodes = JSON.parse(localStorage.getItem('qrCodes') || '{}');
@@ -600,7 +1430,7 @@
                 
                 if (result.success) {
                     showMessage('Student deleted successfully', 'success');
-                    loadStudents();
+                    refreshStudentsQR();
                 } else {
                     showMessage(result.error || 'Failed to delete student', 'error');
                 }
@@ -610,6 +1440,8 @@
         }
 
         // Session management
+        let sessionTimer = null;
+
         async function startSession() {
             const section = document.getElementById('sectionSelect').value;
             
@@ -634,6 +1466,29 @@
                     document.getElementById('sessionInfo').style.display = 'block';
                     document.getElementById('startBtn').disabled = true;
                     document.getElementById('endBtn').disabled = false;
+                    
+                    // Load system settings and set up auto-end timer
+                    const saved = localStorage.getItem('qrSystemSettings');
+                    if (saved) {
+                        const settings = JSON.parse(saved);
+                        if (settings.autoEndSession === 'true' && settings.sessionDuration) {
+                            const durationMinutes = parseInt(settings.sessionDuration);
+                            if (durationMinutes > 0) {
+                                // Clear any existing timer
+                                if (sessionTimer) {
+                                    clearTimeout(sessionTimer);
+                                }
+                                
+                                // Set new timer to auto-end session
+                                sessionTimer = setTimeout(() => {
+                                    endSession();
+                                    showMessage(`Session automatically ended after ${durationMinutes} minutes`, 'info');
+                                }, durationMinutes * 60 * 1000);
+                                
+                                showMessage(`Auto-end timer set for ${durationMinutes} minutes`, 'success');
+                            }
+                        }
+                    }
                 } else {
                     showMessage(result.error || 'Failed to start session', 'error');
                 }
@@ -644,6 +1499,12 @@
 
         async function endSession() {
             try {
+                // Clear the auto-end timer if it exists
+                if (sessionTimer) {
+                    clearTimeout(sessionTimer);
+                    sessionTimer = null;
+                }
+                
                 const response = await fetch('/api/session/end', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
@@ -666,26 +1527,121 @@
         }
 
         // QR scanning
-        function initScanner() {
-            html5QrCode = new Html5Qrcode("reader");
-            
-            html5QrCode.start(
-                { facingMode: "environment" },
-                {
-                    fps: 10,
-                    qrbox: { width: 250, height: 250 }
-                },
-                (decodedText, result) => {
-                    if (decodedText) {
-                        processQRScan(decodedText);
-                    }
-                },
-                (errorMessage) => {
-                    // handle scan error, silently ignore
+        async function initScanner() {
+            try {
+                html5QrCode = new Html5Qrcode("reader");
+                
+                // First, try to get available cameras
+                const devices = await Html5Qrcode.getCameras();
+                
+                if (devices && devices.length === 0) {
+                    showMessage('No cameras found. Please connect a camera.', 'error');
+                    return;
                 }
-            ).catch((err) => {
+                
+                // Populate camera dropdown
+                await populateCameraDropdown(devices);
+                
+                // Try to start with first available camera
+                let cameraConfig = devices.length > 1 ? { facingMode: "environment" } : devices[0].id;
+                
+                await html5QrCode.start(
+                    cameraConfig,
+                    {
+                        fps: 10,
+                        qrbox: { width: 320, height: 320 }
+                    },
+                    (decodedText, result) => {
+                        if (decodedText) {
+                            processQRScan(decodedText);
+                        }
+                    },
+                    (errorMessage) => {
+                        // handle scan error, silently ignore
+                    }
+                );
+                
+                showMessage('Camera started successfully', 'success');
+                
+            } catch (err) {
                 console.error(`Unable to start scanning: ${err}`);
+                
+                if (err.name === 'NotAllowedError') {
+                    showMessage('Camera permission denied. Please allow camera access in your browser settings.', 'error');
+                } else if (err.name === 'NotFoundError') {
+                    showMessage('No camera found. Please connect a camera.', 'error');
+                } else if (err.name === 'NotReadableError') {
+                    showMessage('Camera is already in use by another application.', 'error');
+                } else {
+                    showMessage('Camera access failed. Please try resetting the camera.', 'error');
+                }
+                
+                // Try to reset scanner after a delay
+                setTimeout(() => {
+                    if (html5QrCode) {
+                        html5QrCode.clear().then(() => {
+                            html5QrCode = null;
+                        }).catch((clearErr) => {
+                            console.error('Error clearing scanner:', clearErr);
+                        });
+                    }
+                }, 3000);
+            }
+        }
+
+        async function populateCameraDropdown(devices) {
+            const cameraSelect = document.getElementById('cameraSelect');
+            cameraSelect.innerHTML = '';
+            
+            devices.forEach((device, index) => {
+                const option = document.createElement('option');
+                option.value = device.id;
+                option.textContent = device.label || `Camera ${index + 1}`;
+                cameraSelect.appendChild(option);
             });
+        }
+
+        async function switchCamera() {
+            const cameraSelect = document.getElementById('cameraSelect');
+            const selectedCameraId = cameraSelect.value;
+            
+            if (!selectedCameraId || !html5QrCode) return;
+            
+            try {
+                await html5QrCode.stop();
+                await html5QrCode.start(
+                    selectedCameraId,
+                    {
+                        fps: 10,
+                        qrbox: { width: 320, height: 320 }
+                    },
+                    (decodedText, result) => {
+                        if (decodedText) {
+                            processQRScan(decodedText);
+                        }
+                    },
+                    (errorMessage) => {
+                        // handle scan error, silently ignore
+                    }
+                );
+                showMessage('Camera switched successfully', 'success');
+            } catch (err) {
+                console.error('Error switching camera:', err);
+                showMessage('Failed to switch camera', 'error');
+            }
+        }
+
+        function resetScanner() {
+            if (html5QrCode) {
+                html5QrCode.stop().then(() => {
+                    html5QrCode.clear().then(() => {
+                        html5QrCode = null;
+                        setTimeout(initScanner, 500);
+                    });
+                }).catch((err) => {
+                    console.error('Error stopping scanner:', err);
+                });
+            }
         }
 
         async function processQRScan(qrData) {
@@ -704,19 +1660,38 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    showMessage(`Attendance marked for ${result.name} (${result.studentId})`, 'success');
+                    const message = result.alreadyScanned ? 
+                        `${result.name} - Already scanned` : 
+                        `Attendance marked for ${result.name}`;
+                    
+                    showMessage(message, 'success');
                     document.getElementById('scanResult').innerHTML = `
                         <div class="success-message">
-                            ✓ ${result.name} - ${result.studentId}<br>
+                            ${result.name} - ${result.studentId}<br>
                             Section: ${result.section}<br>
+                            ${result.alreadyScanned ? 'Status: Already recorded' : 'Status: Attendance marked'}<br>
                             Time: ${new Date().toLocaleString()}
                         </div>
                     `;
-                    refreshAttendance();
+                    if (!result.alreadyScanned) {
+                        refreshAttendance();
+                    }
                 } else {
                     showMessage(result.error || 'Failed to mark attendance', 'error');
+                    
+                    // Display detailed error message for section mismatch
+                    let errorContent = result.error;
+                    if (result.error === 'Section mismatch' && result.message) {
+                        errorContent = result.message;
+                    }
+                    
                     document.getElementById('scanResult').innerHTML = `
-                        <div class="error-message">${result.error}</div>
+                        <div class="error-message">
+                            ${errorContent}
+                            ${result.studentSection && result.sessionSection ? 
+                                `<br><small>Student Section: ${result.studentSection} | Active Session: ${result.sessionSection}</small>` 
+                                : ''}
+                        </div>
                     `;
                 }
             } catch (error) {
@@ -728,45 +1703,113 @@
         async function refreshAttendance() {
             try {
                 const response = await fetch('/api/attendance');
-                attendance = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch attendance');
+                }
+                
+                const data = await response.json();
+                
+                // Ensure data is an array
+                if (Array.isArray(data)) {
+                    attendance = data;
+                } else {
+                    attendance = [];
+                }
+                
                 displayAttendance();
             } catch (error) {
-                showMessage('Error loading attendance', 'error');
+                console.error('Error refreshing attendance:', error);
+                attendance = [];
+                displayAttendance();
             }
         }
 
         function displayAttendance() {
-            const container = document.getElementById('attendanceList');
-            
-            if (attendance.length === 0) {
-                container.innerHTML = '<p>No attendance records yet</p>';
-                return;
+            try {
+                const container = document.getElementById('attendanceList');
+                const filterSectionElement = document.getElementById('attendanceSectionFilter');
+                const filterSection = filterSectionElement ? filterSectionElement.value : '';
+                
+                let filteredAttendance = attendance;
+                if (filterSection) {
+                    filteredAttendance = attendance.filter(record => record.section === filterSection);
+                }
+                
+                if (filteredAttendance.length === 0) {
+                    container.innerHTML = '<p>No attendance records found</p>';
+                    return;
+                }
+                
+                // Group by section
+                const groupedBySection = {};
+                filteredAttendance.forEach(record => {
+                    if (!groupedBySection[record.section]) {
+                        groupedBySection[record.section] = [];
+                    }
+                    groupedBySection[record.section].push(record);
+                });
+                
+                let html = '';
+                Object.keys(groupedBySection).sort().forEach(section => {
+                    html += `
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="color: #6366f1; margin-bottom: 16px; font-size: 1.2rem;">
+                                Section ${section} (${groupedBySection[section].length} students)
+                            </h3>
+                            <div class="attendance-section-list">
+                    `;
+                    
+                    groupedBySection[section].forEach(record => {
+                        html += `
+                            <div class="attendance-item">
+                                <div>
+                                    <strong>${record.name}</strong><br>
+                                    <small>ID: ${record.student_id}</small>
+                                </div>
+                                <div>
+                                    <span class="time">${new Date(record.scan_time).toLocaleString()}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            } catch (error) {
+                console.error('Error in displayAttendance:', error);
+                container.innerHTML = `<p>Error displaying attendance: ${error.message}</p>`;
             }
-            
-            container.innerHTML = attendance.map(record => `
-                <div class="attendance-item">
-                    <div>
-                        <strong>${record.name}</strong><br>
-                        <small>ID: ${record.student_id}</small>
-                    </div>
-                    <div>
-                        <span class="section-badge">${record.section}</span><br>
-                        <span class="time">${new Date(record.scan_time).toLocaleString()}</span>
-                    </div>
-                </div>
-            `).join('');
+        }
+
+        function filterAttendance() {
+            displayAttendance();
         }
 
         async function exportAttendance() {
             try {
-                const response = await fetch('/api/attendance/export');
+                const section = document.getElementById('attendanceSectionFilter').value;
+                const url = section ? `/api/attendance/export?section=${section}` : '/api/attendance/export';
+                
+                const response = await fetch(url);
                 const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
+                const downloadUrl = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.href = url;
-                a.download = 'attendance.csv';
+                a.href = downloadUrl;
+                
+                // Generate filename with attendance, section, and date
+                const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+                const sectionText = section ? `_${section}` : '';
+                const filename = `Attendance${sectionText}_${today}.csv`;
+                
+                a.download = filename;
                 a.click();
-                window.URL.revokeObjectURL(url);
+                window.URL.revokeObjectURL(downloadUrl);
                 showMessage('Attendance exported successfully', 'success');
             } catch (error) {
                 showMessage('Error exporting attendance', 'error');
@@ -796,11 +1839,168 @@
             }, 3000);
         }
 
+        // Student Scan Count Functions
+        async function loadStudentScanCounts() {
+            try {
+                const section = document.getElementById('scanCountSectionFilter').value;
+                const dateRange = document.getElementById('dateRangeFilter').value;
+                
+                let startDate = '';
+                let endDate = '';
+                
+                if (dateRange === 'today') {
+                    const today = new Date().toISOString().split('T')[0];
+                    startDate = today + ' 00:00:00';
+                    endDate = today + ' 23:59:59';
+                } else if (dateRange === 'week') {
+                    const now = new Date();
+                    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    startDate = weekAgo.toISOString();
+                    endDate = now.toISOString();
+                } else if (dateRange === 'month') {
+                    const now = new Date();
+                    const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                    startDate = monthAgo.toISOString();
+                    endDate = now.toISOString();
+                }
+                
+                let url = '/api/students/scan-counts?';
+                const params = new URLSearchParams();
+                if (section) params.append('section', section);
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                url += params.toString();
+                
+                const response = await fetch(url);
+                const students = await response.json();
+                
+                const studentSelect = document.getElementById('studentSelect');
+                studentSelect.innerHTML = '<option value="">Choose a student...</option>';
+                
+                students.forEach(student => {
+                    const option = document.createElement('option');
+                    option.value = student.student_id;
+                    option.textContent = `${student.name} (${student.section}) - ${student.scanCount} Attendance`;
+                    option.dataset.name = student.name;
+                    option.dataset.section = student.section;
+                    studentSelect.appendChild(option);
+                });
+                
+                // Hide scan count display when filters change
+                document.getElementById('scanCountDisplay').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error loading student scan counts:', error);
+                showMessage('Error loading student data', 'error');
+            }
+        }
+
+        async function showStudentScanCount() {
+            const studentSelect = document.getElementById('studentSelect');
+            const selectedOption = studentSelect.options[studentSelect.selectedIndex];
+            
+            if (!studentSelect.value) {
+                document.getElementById('scanCountDisplay').style.display = 'none';
+                document.getElementById('studentAttendanceList').style.display = 'none';
+                return;
+            }
+            
+            try {
+                const section = document.getElementById('scanCountSectionFilter').value;
+                const dateRange = document.getElementById('dateRangeFilter').value;
+                
+                let startDate = '';
+                let endDate = '';
+                
+                if (dateRange === 'today') {
+                    const today = new Date().toISOString().split('T')[0];
+                    startDate = today + ' 00:00:00';
+                    endDate = today + ' 23:59:59';
+                } else if (dateRange === 'week') {
+                    const now = new Date();
+                    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    startDate = weekAgo.toISOString();
+                    endDate = now.toISOString();
+                } else if (dateRange === 'month') {
+                    const now = new Date();
+                    const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                    startDate = monthAgo.toISOString();
+                    endDate = now.toISOString();
+                }
+                
+                // Fetch scan count
+                let url = `/api/students/${studentSelect.value}/scan-count?`;
+                const params = new URLSearchParams();
+                if (section) params.append('section', section);
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                url += params.toString();
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                document.getElementById('selectedStudentName').textContent = selectedOption.dataset.name;
+                document.getElementById('selectedStudentId').textContent = `ID: ${studentSelect.value}`;
+                document.getElementById('scanCountValue').textContent = data.scanCount;
+                document.getElementById('scanCountDisplay').style.display = 'block';
+                
+                // Fetch individual attendance records
+                await loadStudentAttendanceRecords(studentSelect.value, section, startDate, endDate);
+                
+            } catch (error) {
+                console.error('Error getting student scan count:', error);
+                showMessage('Error getting scan count', 'error');
+            }
+        }
+
+        async function loadStudentAttendanceRecords(studentId, section, startDate, endDate) {
+            try {
+                let url = `/api/students/${studentId}/attendance?`;
+                const params = new URLSearchParams();
+                if (section) params.append('section', section);
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                url += params.toString();
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                const container = document.getElementById('studentAttendanceList');
+                
+                if (data.attendance && data.attendance.length > 0) {
+                    container.innerHTML = data.attendance.map(record => `
+                        <div class="student-attendance-item">
+                            <div>
+                                <strong>${record.name}</strong><br>
+                                <small>ID: ${record.student_id}</small>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: #64748b; font-size: 12px; margin-bottom: 4px;">
+                                    ${new Date(record.scan_time).toLocaleDateString()}
+                                </div>
+                                <div class="time">${new Date(record.scan_time).toLocaleString()}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('studentAttendanceList').style.display = 'block';
+                } else {
+                    container.innerHTML = '<p style="text-align: center; color: #64748b; padding: 32px;">No attendance records found for this student.</p>';
+                    document.getElementById('studentAttendanceList').style.display = 'block';
+                }
+                
+            } catch (error) {
+                console.error('Error loading student attendance records:', error);
+                showMessage('Error loading attendance records', 'error');
+            }
+        }
+
         // Initialize on load
         window.onload = function() {
-            loadStudents();
+            refreshStudentsQR();
             refreshAttendance();
             checkCurrentSession();
+            loadStudentScanCounts();
         };
 
         async function checkCurrentSession() {
@@ -819,6 +2019,450 @@
                 console.error('Error checking current session');
             }
         }
+
+        // Students QR Tab Functions
+        let studentsQRData = [];
+        let filteredStudentsQR = [];
+
+        async function refreshStudentsQR() {
+            try {
+                const response = await fetch('/api/students');
+                studentsQRData = await response.json();
+                filteredStudentsQR = [];
+                displayStudentsQR();
+            } catch (error) {
+                console.error('Error loading students:', error);
+                studentsQRData = [];
+                filteredStudentsQR = [];
+                displayStudentsQR();
+            }
+        }
+
+        function searchStudentsQR() {
+            displayStudentsQR();
+        }
+
+        function filterStudentsQR() {
+            searchStudentsQR();
+        }
+
+        function displayStudentsQR() {
+            const container = document.getElementById('studentsQRList');
+            const searchTerm = document.getElementById('studentQRSearch').value.toLowerCase().trim();
+            const sectionFilter = document.getElementById('studentQRSectionFilter').value;
+            
+            let studentsToDisplay = studentsQRData;
+            
+            // Apply filters
+            if (searchTerm || sectionFilter) {
+                studentsToDisplay = studentsQRData.filter(student => {
+                    const matchesSearch = !searchTerm || 
+                        student.name.toLowerCase().includes(searchTerm) ||
+                        student.student_id.toLowerCase().includes(searchTerm);
+                    
+                    const matchesSection = !sectionFilter || student.section === sectionFilter;
+                    
+                    return matchesSearch && matchesSection;
+                });
+            }
+            
+            if (studentsToDisplay.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #64748b; padding: 32px;">No students found matching your criteria.</p>';
+                return;
+            }
+            
+            container.innerHTML = studentsToDisplay.map(student => {
+                return `
+                <div class="student-card" style="page-break-inside: avoid; cursor: pointer;" onclick="showStudentModal('${student.student_id}', '${student.name}', '${student.section || ''}', '${student.qrCode || ''}')">
+                    <button class="delete-btn" onclick="event.stopPropagation(); deleteStudent('${student.student_id}')" title="Delete student">×</button>
+                    <div class="student-info">
+                        <div class="student-name">${student.name}</div>
+                        <div class="student-id">ID: ${student.student_id}</div>
+                        ${student.section ? `<div class="student-section">Section ${student.section}</div>` : ''}
+                    </div>
+                    <div class="qr-code">
+                        ${student.qrCode ? 
+                            `<img src="${student.qrCode}" alt="QR Code for ${student.name}">` : 
+                            '<p style="color: #64748b; font-size: 12px;">QR Code not available</p>'
+                        }
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function printAllQRCodes() {
+            const printWindow = window.open('', '_blank');
+            const sectionFilter = document.getElementById('studentQRSectionFilter').value;
+            const searchTerm = document.getElementById('studentQRSearch').value.toLowerCase().trim();
+            
+            let studentsToPrint = studentsQRData;
+            
+            // Apply filters if any
+            if (sectionFilter || searchTerm) {
+                studentsToPrint = studentsQRData.filter(student => {
+                    const matchesSearch = !searchTerm || 
+                        student.name.toLowerCase().includes(searchTerm) ||
+                        student.student_id.toLowerCase().includes(searchTerm);
+                    
+                    const matchesSection = !sectionFilter || student.section === sectionFilter;
+                    
+                    return matchesSearch && matchesSection;
+                });
+            }
+            
+            if (studentsToPrint.length === 0) {
+                showMessage('No students to print', 'error');
+                return;
+            }
+            
+            const printDate = new Date().toLocaleDateString();
+            const sectionText = sectionFilter ? ` - Section ${sectionFilter}` : '';
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Student QR Codes${sectionText}</title>
+                    <style>
+                        body { font-family: 'Poppins', sans-serif; margin: 20px; }
+                        h1 { text-align: center; color: #1e293b; margin-bottom: 10px; }
+                        .date { text-align: center; color: #64748b; margin-bottom: 30px; }
+                        .student-card { 
+                            border: 2px solid #334155; 
+                            border-radius: 8px; 
+                            padding: 20px; 
+                            margin: 10px; 
+                            text-align: center; 
+                            width: 250px; 
+                            display: inline-block; 
+                            page-break-inside: avoid;
+                            background: white;
+                        }
+                        .student-name { font-weight: bold; font-size: 16px; margin-bottom: 5px; }
+                        .student-id { color: #64748b; font-size: 14px; margin-bottom: 10px; }
+                        .section-badge { 
+                            background: #6366f1; 
+                            color: white; 
+                            padding: 4px 12px; 
+                            border-radius: 20px; 
+                            font-size: 12px; 
+                            font-weight: 600;
+                            display: inline-block;
+                            margin-bottom: 15px;
+                        }
+                        .qr-code { margin-top: 15px; }
+                        .qr-code img { max-width: 180px; }
+                        @media print {
+                            body { margin: 10px; }
+                            .student-card { margin: 8px; width: 200px; }
+                            .qr-code img { max-width: 150px; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Student QR Codes${sectionText}</h1>
+                    <div class="date">Generated on: ${printDate}</div>
+                    <div>
+                        ${studentsToPrint.map(student => `
+                            <div class="student-card">
+                                <div class="student-name">${student.name}</div>
+                                <div class="student-id">ID: ${student.student_id}</div>
+                                ${student.section ? `<div class="section-badge">${student.section}</div>` : ''}
+                                <div class="qr-code">
+                                    ${student.qrCode ? 
+                                        `<img src="${student.qrCode}" alt="QR Code for ${student.name}">` : 
+                                        '<p style="color: #64748b; font-size: 12px;">QR Code not available</p>'
+                                    }
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.focus();
+            
+            // Wait for images to load before printing
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 1000);
+        }
+
+        // Section Management Functions
+        let sectionsData = [];
+
+        // Load sections when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSections();
+        });
+
+        async function loadSections() {
+            try {
+                const response = await fetch('/api/sections');
+                const sections = await response.json();
+                sectionsData = sections;
+                displaySections();
+                updateAllSectionDropdowns();
+            } catch (error) {
+                console.error('Error loading sections:', error);
+                showMessage('Failed to load sections', 'error');
+            }
+        }
+
+        function displaySections() {
+            const container = document.getElementById('sectionsList');
+            
+            if (sectionsData.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-tertiary); padding: 32px;">No sections found. Add your first section above.</p>';
+                return;
+            }
+            
+            container.innerHTML = sectionsData.map(section => `
+                <div style="background: var(--bg-primary); padding: 16px; border-radius: 8px; margin-bottom: 12px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <strong style="color: var(--text-primary); font-size: 16px;">${section.name}</strong>
+                            <span style="background: ${section.status === 'active' ? 'var(--success)' : 'var(--error)'}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;">
+                                ${section.status.toUpperCase()}
+                            </span>
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 14px;">Code: ${section.code}</div>
+                        <div style="color: var(--text-tertiary); font-size: 12px; margin-top: 4px;">
+                            Created: ${new Date(section.created_at).toLocaleDateString()}
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="editSection(${section.id}, '${section.code}', '${section.name}', '${section.status}')" style="background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%); padding: 8px 16px; font-size: 12px;">Edit</button>
+                        <button onclick="deleteSection(${section.id}, '${section.code}')" style="background: linear-gradient(135deg, var(--error) 0%, var(--error-hover) 100%); padding: 8px 16px; font-size: 12px;">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function addSection() {
+            const name = document.getElementById('newSectionName').value.trim();
+            const code = document.getElementById('newSectionCode').value.trim().toUpperCase();
+            
+            if (!name || !code) {
+                showMessage('Please enter both section name and code', 'error');
+                return;
+            }
+            
+            if (code.length < 1 || code.length > 2) {
+                showMessage('Section code must be 1-2 characters', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/sections', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, code })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('Section added successfully', 'success');
+                    document.getElementById('newSectionName').value = '';
+                    document.getElementById('newSectionCode').value = '';
+                    loadSections();
+                } else {
+                    showMessage(result.error || 'Failed to add section', 'error');
+                }
+            } catch (error) {
+                console.error('Error adding section:', error);
+                showMessage('Failed to add section', 'error');
+            }
+        }
+
+        function editSection(id, code, name, status) {
+            const newName = prompt('Section Name:', name);
+            if (newName === null) return;
+            
+            const newCode = prompt('Section Code:', code);
+            if (newCode === null) return;
+            
+            const newStatus = confirm('Is this section active?') ? 'active' : 'inactive';
+            
+            if (!newName.trim() || !newCode.trim()) {
+                showMessage('Section name and code are required', 'error');
+                return;
+            }
+            
+            updateSection(id, newCode.trim().toUpperCase(), newName.trim(), newStatus);
+        }
+
+        async function updateSection(id, code, name, status) {
+            try {
+                const response = await fetch(`/api/sections/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code, name, status })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('Section updated successfully', 'success');
+                    loadSections();
+                } else {
+                    showMessage(result.error || 'Failed to update section', 'error');
+                }
+            } catch (error) {
+                console.error('Error updating section:', error);
+                showMessage('Failed to update section', 'error');
+            }
+        }
+
+        async function deleteSection(id, code) {
+            if (!confirm(`Are you sure you want to delete section "${code}"? This action cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/sections/${id}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('Section deleted successfully', 'success');
+                    loadSections();
+                } else {
+                    showMessage(result.error || 'Failed to delete section', 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting section:', error);
+                showMessage('Failed to delete section', 'error');
+            }
+        }
+
+        function updateAllSectionDropdowns() {
+            const dropdowns = [
+                'studentSection',
+                'studentQRSectionFilter', 
+                'attendanceSectionFilter',
+                'scanCountSectionFilter',
+                'sectionSelect'
+            ];
+            
+            dropdowns.forEach(dropdownId => {
+                const dropdown = document.getElementById(dropdownId);
+                if (dropdown) {
+                    const currentValue = dropdown.value;
+                    dropdown.innerHTML = '<option value="">Select Section</option>';
+                    
+                    sectionsData.forEach(section => {
+                        if (section.status === 'active') {
+                            dropdown.innerHTML += `<option value="${section.code}">${section.name}</option>`;
+                        }
+                    });
+                    
+                    // Restore previous selection if it still exists
+                    if (currentValue && sectionsData.some(s => s.code === currentValue && s.status === 'active')) {
+                        dropdown.value = currentValue;
+                    }
+                }
+            });
+        }
+
+        // System Settings Functions
+        function saveSystemSettings() {
+            const sessionDuration = document.getElementById('sessionDuration').value;
+            const autoEndSession = document.getElementById('autoEndSession').value;
+            
+            // Save to localStorage for now (could be extended to save to backend)
+            localStorage.setItem('qrSystemSettings', JSON.stringify({
+                sessionDuration: sessionDuration,
+                autoEndSession: autoEndSession
+            }));
+            
+            showMessage('System settings saved successfully', 'success');
+        }
+
+        function resetToDefaults() {
+            if (confirm('Are you sure you want to reset all settings to default values?')) {
+                document.getElementById('sessionDuration').value = 60;
+                document.getElementById('autoEndSession').value = 'true';
+                
+                localStorage.removeItem('qrSystemSettings');
+                showMessage('Settings reset to defaults', 'success');
+            }
+        }
+
+        function loadSystemSettings() {
+            const saved = localStorage.getItem('qrSystemSettings');
+            if (saved) {
+                const settings = JSON.parse(saved);
+                document.getElementById('sessionDuration').value = settings.sessionDuration || 60;
+                document.getElementById('autoEndSession').value = settings.autoEndSession || 'true';
+            }
+        }
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Update theme
+            html.setAttribute('data-theme', newTheme);
+            themeToggle.setAttribute('data-theme', newTheme);
+            
+            // Update icon
+            themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme on page load
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            html.setAttribute('data-theme', savedTheme);
+            themeToggle.setAttribute('data-theme', savedTheme);
+            themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+        }
+
+        // Load system settings when settings tab is shown
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            currentTab = tabName;
+            
+            // Load system settings if settings tab
+            if (tabName === 'settings') {
+                loadSystemSettings();
+                loadSections();
+            }
+            
+            // Initialize scanner if scanner tab
+            if (tabName === 'scanner' && !html5QrCode) {
+                setTimeout(() => initScanner(), 100);
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+        });
     </script>
 </body>
 </html>
