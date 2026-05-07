@@ -5,12 +5,12 @@
   "main": "simple-server.js",
   "scripts": {
     "start": "node simple-server.js",
-    "install-deps": "npm install express better-sqlite3 qrcode"
+    "install-deps": "npm install express sqlite3 qrcode"
   },
   "dependencies": {
     "express": "^4.18.2",
     "qrcode": "^1.5.3",
-    "better-sqlite3": "^9.2.2"
+    "sqlite3": "^5.1.6"
   },
   "keywords": [
     "qr",
